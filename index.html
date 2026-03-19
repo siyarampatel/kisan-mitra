@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>किसान मित्र — Kisan Mitra</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --saffron:     #e8560a;
+    --saffron-mid: #f07030;
+    --green:       #1e7c3a;
+    --green-mid:   #28a04a;
+    --earth:       #7a4e28;
+    --white:       #ffffff;
+    --page-bg:     #f6f4f0;
+    --text-dark:   #1a1208;
+    --text-mid:    #5a4a30;
+    --text-light:  #9a8a70;
+    --border:      #e8e0d0;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--page-bg);
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, #e8560a0a 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, #1e7c3a0a 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .page { width: 100%; max-width: 420px; position: relative; }
+
+  /* ── LOGO SECTION ── */
+  .logo-section {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-illustration {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+  }
+
+  .slogan {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 13px;
+    color: var(--saffron);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .title-hi {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 42px;
+    color: var(--text-dark);
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+  }
+
+  .title-en {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .tagline {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* ── LANGUAGE SECTION ── */
+  .lang-section {
+    animation: fadeUp 0.6s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .lang-label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lang-label::before, .lang-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .lang-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    border: 2px solid transparent;
+  }
+
+  .lang-btn:hover { transform: translateY(-2px); }
+  .lang-btn:active { transform: scale(0.98); }
+
+  .btn-hi {
+    background: var(--saffron);
+    box-shadow: 0 4px 20px #e8560a30;
+  }
+
+  .btn-hi:hover { box-shadow: 0 8px 28px #e8560a40; }
+
+  .btn-en {
+    background: var(--white);
+    border-color: var(--border);
+    box-shadow: 0 2px 12px #0000000a;
+  }
+
+  .btn-en:hover { border-color: #c8b890; box-shadow: 0 6px 20px #00000012; }
+
+  .btn-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .btn-hi .btn-icon { background: #ffffff20; }
+  .btn-en .btn-icon { background: #f6f4f0; }
+
+  .btn-text { flex: 1; }
+
+  .btn-main-hi { font-family: 'Tiro Devanagari Hindi', serif; }
+  .btn-hi .btn-main-hi { font-size: 26px; color: white; line-height: 1.1; }
+  .btn-en .btn-main-hi { font-size: 26px; color: var(--text-dark); line-height: 1.1; }
+
+  .btn-sub {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 3px;
+    display: block;
+  }
+
+  .btn-hi .btn-sub { color: #ffccaa; }
+  .btn-en .btn-sub { color: var(--text-light); }
+
+  .btn-arrow {
+    font-size: 22px;
+    transition: transform 0.2s;
+  }
+
+  .btn-hi .btn-arrow { color: #ffccaa; }
+  .btn-en .btn-arrow { color: var(--border); }
+  .lang-btn:hover .btn-arrow { transform: translateX(4px); }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- LOGO -->
+  <div class="logo-section">
+    <div class="logo-illustration">
+      <svg viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sun -->
+        <circle cx="65" cy="38" r="18" fill="#f5e27a" opacity="0.5"/>
+        <line x1="65" y1="16" x2="65" y2="11" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <line x1="65" y1="61" x2="65" y2="66" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <line x1="43" y1="38" x2="38" y2="38" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <line x1="87" y1="38" x2="92" y2="38" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="46" y2="21" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <line x1="80" y1="25" x2="84" y2="21" stroke="#f5c842" stroke-width="2" stroke-linecap="round"/>
+        <!-- Ground -->
+        <line x1="10" y1="112" x2="120" y2="112" stroke="#4caf78" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="65" cy="114" rx="52" ry="6" fill="#b5d99c" opacity="0.3"/>
+        <!-- Cow body -->
+        <ellipse cx="36" cy="94" rx="20" ry="12" fill="#e8d5b0"/>
+        <path d="M32 82 Q36 72 42 78 Q40 83 34 83Z" fill="#d4bc90"/>
+        <ellipse cx="20" cy="86" rx="8" ry="7" fill="#e8d5b0"/>
+        <ellipse cx="14" cy="88" rx="4.5" ry="3.5" fill="#d4a882"/>
+        <circle cx="13" cy="88" r="1" fill="#a0745a"/>
+        <circle cx="15" cy="88" r="1" fill="#a0745a"/>
+        <circle cx="20" cy="84" r="1.8" fill="#4a3020"/>
+        <circle cx="20.5" cy="83.5" r="0.5" fill="white"/>
+        <ellipse cx="27" cy="80" rx="3.5" ry="2.2" fill="#e8d5b0" transform="rotate(-20 27 80)"/>
+        <path d="M24 78 Q26 72 30 74" stroke="#c8a96e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M28 77 Q32 72 34 75" stroke="#c8a96e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <rect x="21" y="103" width="5" height="11" rx="2.5" fill="#d4bc90"/>
+        <rect x="28" y="103" width="5" height="11" rx="2.5" fill="#d4bc90"/>
+        <rect x="37" y="103" width="5" height="11" rx="2.5" fill="#d4bc90"/>
+        <rect x="44" y="103" width="5" height="11" rx="2.5" fill="#d4bc90"/>
+        <path d="M56 92 Q62 88 60 97 Q58 101 62 105" stroke="#c8a96e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <ellipse cx="34" cy="106" rx="6" ry="3.5" fill="#f0c0a0"/>
+        <path d="M14 85 Q17 82 22 85" stroke="#e85d5d" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <circle cx="15" cy="84" r="1.2" fill="#e85d5d"/>
+        <circle cx="18" cy="83" r="1.2" fill="#f5c842"/>
+        <circle cx="21" cy="83.5" r="1.2" fill="#e85d5d"/>
+        <!-- Farmer -->
+        <path d="M80 100 Q78 112 76 112" stroke="#f0f0f0" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M84 100 Q86 112 88 112" stroke="#f0f0f0" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <rect x="75" y="83" width="20" height="20" rx="5" fill="#e8560a"/>
+        <path d="M85 83 L83 87 L85 89 L87 87Z" fill="#c04008"/>
+        <path d="M75 87 Q68 91 67 97" stroke="#c8956c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M95 87 Q100 90 101 95" stroke="#c8956c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <path d="M67 97 Q62 98 58 96 Q54 94 50 92" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2.5 1.5" fill="none"/>
+        <path d="M101 95 Q104 90 102 86" stroke="#c8956c" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M102 86 Q102 80 100 76" stroke="#2d7a4f" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M100 80 Q97 76 99 73" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M100 78 Q103 75 102 72" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <circle cx="85" cy="77" r="9" fill="#c8956c"/>
+        <ellipse cx="76.5" cy="77" rx="1.8" ry="2.2" fill="#b87d55"/>
+        <ellipse cx="93.5" cy="77" rx="1.8" ry="2.2" fill="#b87d55"/>
+        <path d="M82 76 Q83 74 84 76" stroke="#3a2010" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M86 76 Q87 74 88 76" stroke="#3a2010" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M82 80 Q85 83 88 80" stroke="#3a2010" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M82 78 Q85 79.5 88 78" stroke="#3a2010" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M77 74 Q78 65 85 64 Q92 65 93 74" fill="#e8560a" stroke="#c04008" stroke-width="0.8"/>
+        <path d="M77 74 Q81 70 85 69 Q89 70 93 74" fill="#f07030"/>
+        <path d="M85 64 Q87 61 89 63" stroke="#c04008" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <circle cx="85" cy="67" r="1.5" fill="#f5c842"/>
+      </svg>
+    </div>
+
+    <div class="slogan">॥ जय जवान जय किसान ॥</div>
+    <div class="title-hi">किसान मित्र</div>
+    <div class="title-en">Kisan Mitra</div>
+    <div class="tagline">आपकी फसल, आपका समाधान<br>Your crop, your solution</div>
+  </div>
+
+  <!-- LANGUAGE SELECTION -->
+  <div class="lang-section">
+    <div class="lang-label">भाषा चुनें &nbsp;·&nbsp; Select Language</div>
+    <div class="lang-buttons">
+
+      <a class="lang-btn btn-hi" href="home.php?lang=hi">
+        <div class="btn-icon">🌾</div>
+        <div class="btn-text">
+          <div class="btn-main-hi">हिंदी</div>
+          <span class="btn-sub">हिंदी में जारी रखें</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <a class="lang-btn btn-en" href="home.php?lang=en">
+        <div class="btn-icon">🌱</div>
+        <div class="btn-text">
+          <div class="btn-main-hi" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:24px;">English</div>
+          <span class="btn-sub">Continue in English</span>
+        </div>
+        <span class="btn-arrow" style="color:#c8b890;">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer">किसान मित्र &nbsp;·&nbsp; Trusted Farming Guidance</div>
+
+</div>
+</body>
+</html>
