@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>किसान मित्र — फसल चुनें</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── KISAN MITRA — SHARED STYLES ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --saffron: #e8560a; --saffron-mid: #f07030; --saffron-pale: #fff3ed; --saffron-border: #f5c0a0;
+  --green: #1e7c3a; --green-mid: #28a04a; --green-pale: #eaf7ee; --green-border: #a8dab8;
+  --earth: #7a4e28; --earth-pale: #fdf3e8; --earth-border: #e0c8a0;
+  --white: #ffffff; --off-white: #fafaf7; --page-bg: #f6f4f0;
+  --text-dark: #1a1208; --text-mid: #5a4a30; --text-light: #9a8a70;
+  --border: #e8e0d0; --card-radius: 16px; --topbar-bg: #1a1208;
+}
+body { min-height: 100vh; background: var(--page-bg); font-family: 'Nunito', sans-serif; color: var(--text-dark); padding-bottom: 48px; -webkit-font-smoothing: antialiased; }
+.topbar { background: var(--topbar-bg); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.topbar-left { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.back-btn { width: 36px; height: 36px; background: #ffffff18; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid #ffffff20; flex-shrink: 0; }
+.topbar-brand { font-family: 'Tiro Devanagari Hindi', serif; font-size: 19px; color: white; line-height: 1.1; }
+.topbar-brand-sub { display: block; font-family: 'Nunito', sans-serif; font-size: 10px; color: #f07030; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px; }
+.lang-toggle { display: flex; background: #ffffff14; border-radius: 22px; overflow: hidden; border: 1px solid #ffffff20; }
+.lang-toggle button { border: none; background: transparent; color: #c0b090; font-size: 12px; font-weight: 800; padding: 7px 14px; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.2s; letter-spacing: 0.5px; }
+.lang-toggle button.active { background: var(--saffron); color: white; border-radius: 22px; }
+.breadcrumb { display: flex; align-items: center; gap: 6px; padding: 14px 20px 0; flex-wrap: wrap; }
+.bc { font-size: 12px; color: var(--text-light); font-weight: 700; letter-spacing: 0.3px; }
+.bc.active { color: var(--saffron); }
+.bc-sep { font-size: 12px; color: var(--border); font-weight: 700; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.anim { animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-d1 { animation-delay: 0.08s; } .anim-d2 { animation-delay: 0.16s; } .anim-d3 { animation-delay: 0.24s; } .anim-d4 { animation-delay: 0.32s; } .anim-d5 { animation-delay: 0.40s; }
+.home-btn { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 24px 20px 0; background: var(--topbar-bg); border-radius: 14px; padding: 16px 20px; text-decoration: none; transition: opacity 0.2s; }
+.home-btn:active { opacity: 0.8; }
+.home-btn-hi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 18px; color: white; }
+.home-btn-en { font-size: 11px; color: #f07030; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px; }
+</style>
+<style>
+  /* ── HERO ── */
+  .hero {
+    background: var(--topbar-bg);
+    padding: 28px 20px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 36px;
+    background: var(--page-bg);
+    border-radius: 36px 36px 0 0;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e8560a18 0%, transparent 70%);
+  }
+
+  .hero-greeting {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--saffron);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 32px;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: #9a8a70;
+    font-weight: 600;
+  }
+
+  /* ── SECTION HEAD ── */
+  .section-head {
+    padding: 24px 20px 16px;
+  }
+
+  .section-title {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 24px;
+    color: var(--text-dark);
+    line-height: 1.2;
+  }
+
+  .section-en {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ── CROP CARDS ── */
+  .crop-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .crop-card {
+    background: var(--white);
+    border-radius: 18px;
+    border: 1.5px solid var(--border);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .crop-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--saffron);
+    box-shadow: 0 6px 24px #e8560a14;
+  }
+
+  .crop-card:active { transform: scale(0.98); }
+
+  .crop-illus {
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .crop-info { flex: 1; }
+
+  .crop-name-hi {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 26px;
+    color: var(--text-dark);
+    line-height: 1.1;
+  }
+
+  .crop-name-en {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin-top: 2px;
+  }
+
+  .crop-season {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .season-rabi   { background: #fff3ed; color: var(--saffron); }
+  .season-kharif { background: var(--green-pale); color: var(--green); }
+
+  .crop-arrow {
+    font-size: 22px;
+    color: var(--border);
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .crop-card:hover .crop-arrow {
+    transform: translateX(4px);
+    color: var(--saffron);
+  }
+
+  /* More crops card */
+  .crop-card-more {
+    background: var(--page-bg);
+    border-style: dashed;
+    justify-content: center;
+    gap: 10px;
+    cursor: default;
+  }
+
+  .crop-card-more:hover {
+    transform: none;
+    border-color: var(--border);
+    box-shadow: none;
+  }
+
+  .more-text-hi {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 16px;
+    color: var(--text-light);
+  }
+
+  .more-text-en {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+  }
+
+  /* ── HELP NOTE ── */
+  .help-note {
+    margin: 20px 20px 0;
+    background: var(--earth-pale);
+    border-radius: 14px;
+    border: 1.5px solid var(--earth-border);
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .help-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--earth);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .help-hi {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 14px;
+    color: var(--earth);
+    line-height: 1.5;
+  }
+
+  .help-en {
+    font-size: 12px;
+    font-weight: 600;
+    color: #9a7050;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="topbar-left" href="index.html">
+    <div style="width:36px;height:36px;background:var(--saffron);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+      <svg width="20" height="20" viewBox="0 0 36 36" fill="none">
+        <path d="M18 4C18 4 10 10 10 20C10 26 13 30 18 32C23 30 26 26 26 20C26 10 18 4 18 4Z" fill="white"/>
+        <path d="M18 10L18 32M18 18C18 18 22 14 26 15" stroke="#e8560a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div>
+      <div class="topbar-brand">किसान मित्र<span class="topbar-brand-sub">Kisan Mitra</span></div>
+    </div>
+  </a>
+  <div class="lang-toggle">
+    <button id="btn-hi" class="active" onclick="setLang('hi')">हिं</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-greeting" id="greeting">नमस्ते किसान भाई</div>
+  <div class="hero-title" id="hero-title">अपनी फसल चुनें</div>
+  <div class="hero-sub" id="hero-sub">समस्या जानने के लिए फसल चुनें</div>
+</div>
+
+<!-- SECTION HEAD -->
+<div class="section-head anim">
+  <div class="section-title" id="section-hi">फसलें</div>
+  <div class="section-en" id="section-en">Select your crop</div>
+</div>
+
+<!-- CROP LIST -->
+<div class="crop-list">
+
+  <!-- Wheat -->
+  <a class="crop-card anim anim-d1" id="wheat-card" href="specific.html?lang=hi&crop=wheat">
+    <div class="crop-illus" style="background:#fff8e1;">
+      <svg width="46" height="46" viewBox="0 0 60 60" fill="none">
+        <line x1="30" y1="55" x2="30" y2="10" stroke="#c8a030" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="30" cy="12" rx="4" ry="6" fill="#e8b840"/>
+        <line x1="30" y1="10" x2="24" y2="4" stroke="#c8a030" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="30" y1="10" x2="36" y2="4" stroke="#c8a030" stroke-width="1.2" stroke-linecap="round"/>
+        <ellipse cx="24" cy="20" rx="4" ry="5" fill="#e8b840" transform="rotate(-20 24 20)"/>
+        <line x1="24" y1="18" x2="18" y2="12" stroke="#c8a030" stroke-width="1" stroke-linecap="round"/>
+        <ellipse cx="36" cy="20" rx="4" ry="5" fill="#e8b840" transform="rotate(20 36 20)"/>
+        <line x1="36" y1="18" x2="42" y2="12" stroke="#c8a030" stroke-width="1" stroke-linecap="round"/>
+        <ellipse cx="24" cy="30" rx="3.5" ry="5" fill="#d4a030" transform="rotate(-15 24 30)"/>
+        <ellipse cx="36" cy="30" rx="3.5" ry="5" fill="#d4a030" transform="rotate(15 36 30)"/>
+        <path d="M30 42 Q20 38 22 32" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M30 42 Q40 36 36 30" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="crop-info">
+      <div class="crop-name-hi" id="wheat-hi">गेहूँ</div>
+      <div class="crop-name-en">Wheat</div>
+      <span class="crop-season season-rabi" id="wheat-season">रबी फसल</span>
+    </div>
+    <div class="crop-arrow">›</div>
+  </a>
+
+  <!-- Rice -->
+  <a class="crop-card anim anim-d2" id="rice-card" href="specific.html?lang=hi&crop=rice">
+    <div class="crop-illus" style="background:#e8f5e9;">
+      <svg width="46" height="46" viewBox="0 0 60 60" fill="none">
+        <path d="M30 55 Q28 40 30 20" stroke="#5a8a30" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M30 20 Q38 24 36 32" stroke="#5a8a30" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M30 22 Q40 28 38 36" stroke="#5a8a30" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M30 20 Q22 24 24 32" stroke="#5a8a30" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M30 22 Q20 28 22 36" stroke="#5a8a30" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <ellipse cx="35" cy="32" rx="2.5" ry="4" fill="#c8e870" transform="rotate(15 35 32)"/>
+        <ellipse cx="37" cy="36" rx="2.5" ry="4" fill="#b8d860" transform="rotate(20 37 36)"/>
+        <ellipse cx="25" cy="32" rx="2.5" ry="4" fill="#c8e870" transform="rotate(-15 25 32)"/>
+        <ellipse cx="23" cy="36" rx="2.5" ry="4" fill="#b8d860" transform="rotate(-20 23 36)"/>
+        <ellipse cx="30" cy="34" rx="2.5" ry="4" fill="#c8e870"/>
+        <path d="M30 38 Q18 34 20 26" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M29 42 Q40 36 38 28" stroke="#4caf78" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M18 54 Q24 51 30 54 Q36 57 42 54" stroke="#80c8f0" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="crop-info">
+      <div class="crop-name-hi" id="rice-hi">धान</div>
+      <div class="crop-name-en">Rice</div>
+      <span class="crop-season season-kharif" id="rice-season">खरीफ फसल</span>
+    </div>
+    <div class="crop-arrow">›</div>
+  </a>
+
+  <!-- Green Peas -->
+  <a class="crop-card anim anim-d3" id="peas-card" href="specific.html?lang=hi&crop=peas">
+    <div class="crop-illus" style="background:#f0fdf4;">
+      <svg width="46" height="46" viewBox="0 0 60 60" fill="none">
+        <path d="M14 54 Q16 44 20 38 Q24 30 28 24 Q32 18 34 12" stroke="#4caf78" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M20 38 Q14 34 16 28 Q18 24 22 26" stroke="#4caf78" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M16 46 Q12 40 16 34 Q22 30 26 36 Q28 42 22 46 Q19 48 16 46Z" fill="#5cb85c"/>
+        <circle cx="18" cy="43" r="2.2" fill="#7dd87d" opacity="0.7"/>
+        <circle cx="20.5" cy="40" r="2.2" fill="#7dd87d" opacity="0.7"/>
+        <circle cx="23" cy="37.5" r="2" fill="#7dd87d" opacity="0.7"/>
+        <path d="M32 28 Q28 22 32 17 Q37 14 40 19 Q42 24 38 28 Q35 30 32 28Z" fill="#6ccc6c"/>
+        <circle cx="33.5" cy="25" r="1.8" fill="#90e090" opacity="0.7"/>
+        <circle cx="35.5" cy="22" r="1.8" fill="#90e090" opacity="0.7"/>
+        <ellipse cx="42" cy="34" rx="7" ry="5" fill="#4caf78" transform="rotate(-30 42 34)"/>
+      </svg>
+    </div>
+    <div class="crop-info">
+      <div class="crop-name-hi" id="peas-hi">मटर</div>
+      <div class="crop-name-en">Green Peas</div>
+      <span class="crop-season season-rabi" id="peas-season">रबी फसल</span>
+    </div>
+    <div class="crop-arrow">›</div>
+  </a>
+
+  <!-- More coming -->
+  <div class="crop-card crop-card-more anim anim-d4">
+    <span style="font-size:22px;">🌱</span>
+    <div>
+      <div class="more-text-hi" id="more-hi">और फसलें जल्द आएंगी</div>
+      <div class="more-text-en">More crops coming soon</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- HELP NOTE -->
+<div class="help-note anim anim-d5">
+  <div class="help-icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
+      <path d="M12 8v4M12 16h.01" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div>
+    <div class="help-hi" id="help-hi">फसल चुनें → समस्या बताएं → सही दवाई पाएं</div>
+    <div class="help-en" id="help-en">Select crop → Choose problem → Get the right solution</div>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  let lang = params.get('lang') || 'hi';
+
+  const t = {
+    hi: {
+      greeting: 'नमस्ते किसान भाई', heroTitle: 'अपनी फसल चुनें', heroSub: 'समस्या जानने के लिए फसल चुनें',
+      sectionHi: 'फसलें', sectionEn: 'Select your crop',
+      wheat: 'गेहूँ', wheatSeason: 'रबी फसल',
+      rice: 'धान', riceSeason: 'खरीफ फसल',
+      peas: 'मटर', peasSeason: 'रबी फसल',
+      moreHi: 'और फसलें जल्द आएंगी',
+      helpHi: 'फसल चुनें → समस्या बताएं → सही दवाई पाएं',
+      helpEn: 'Select crop → Choose problem → Get the right solution',
+    },
+    en: {
+      greeting: 'Hello Farmer', heroTitle: 'Select Your Crop', heroSub: 'Choose your crop to find solutions',
+      sectionHi: 'Crops', sectionEn: 'Select your crop',
+      wheat: 'Wheat', wheatSeason: 'Rabi Crop',
+      rice: 'Rice', riceSeason: 'Kharif Crop',
+      peas: 'Green Peas', peasSeason: 'Rabi Crop',
+      moreHi: 'More crops coming soon',
+      helpHi: 'Select crop → Choose problem → Get the right solution',
+      helpEn: 'फसल चुनें → समस्या बताएं → सही दवाई पाएं',
+    },
+  };
+
+  function applyLang(l) {
+    lang = l;
+    const d = t[l];
+    document.getElementById('greeting').textContent    = d.greeting;
+    document.getElementById('hero-title').textContent  = d.heroTitle;
+    document.getElementById('hero-sub').textContent    = d.heroSub;
+    document.getElementById('section-hi').textContent  = d.sectionHi;
+    document.getElementById('section-en').textContent  = d.sectionEn;
+    document.getElementById('wheat-hi').textContent    = d.wheat;
+    document.getElementById('wheat-season').textContent= d.wheatSeason;
+    document.getElementById('rice-hi').textContent     = d.rice;
+    document.getElementById('rice-season').textContent = d.riceSeason;
+    document.getElementById('peas-hi').textContent     = d.peas;
+    document.getElementById('peas-season').textContent = d.peasSeason;
+    document.getElementById('more-hi').textContent     = d.moreHi;
+    document.getElementById('help-hi').textContent     = d.helpHi;
+    document.getElementById('help-en').textContent     = d.helpEn;
+    document.querySelectorAll('.crop-card[href]').forEach(a => {
+      const u = new URL(a.href, location.href);
+      u.searchParams.set('lang', l);
+      a.href = u.pathname + u.search;
+    });
+    document.getElementById('btn-hi').classList.toggle('active', l === 'hi');
+    document.getElementById('btn-en').classList.toggle('active', l === 'en');
+    document.documentElement.lang = l === 'hi' ? 'hi' : 'en';
+  }
+
+  function setLang(l) { applyLang(l); }
+  applyLang(lang);
+</script>
+</body>
+</html>
